@@ -1,0 +1,99 @@
+--
+-- For more information on build.settings, see the Project Build Settings guide at:
+-- https://docs.coronalabs.com/guide/distribution/buildSettings
+--
+
+settings =
+{
+	splashScreen =
+    {
+        ios = {
+            enable = false,
+        },
+        android = {
+            enable = false,
+        }
+    },
+	orientation =
+	{
+		-- Supported values for orientation:
+		-- portrait, portraitUpsideDown, landscapeLeft, landscapeRight
+		default = "portrait",
+		supported = { "portrait", "portraitUpsideDown", "landscapeLeft", "landscapeRight" },
+	},
+
+	--
+	-- Android section
+	--
+	android =
+	{
+		minSdkVersion = "16",
+		coronaWindowMovesWhenKeyboardAppears = true,
+		facebookAppId = "633565873881541",
+		usesPermissions =
+		{
+			"android.permission.INTERNET",
+            "android.permission.ACCESS_FINE_LOCATION",
+            "android.permission.ACCESS_COARSE_LOCATION",
+			"android.permission.CAMERA",
+			"android.permission.WRITE_EXTERNAL_STORAGE",
+		},
+		usesFeatures =
+        {
+            { name = "android.hardware.location", required = false },
+            { name = "android.hardware.location.gps", required = false },
+            { name = "android.hardware.location.network", required = false },
+			{ name = "android.hardware.camera", required = true },
+			{ name = "android.hardware.camera.front", required = false}
+        },
+		intentFilters = { 
+			{ 
+				label = "Optional Title Goes Here", 
+				actions = { "android.intent.action.VIEW" }, 
+				categories = { "android.intent.category.DEFAULT", "android.intent.category.BROWSABLE", }, 
+				data = { scheme = "myipc" }, 
+			}, 
+		}, 
+	},
+
+	--
+	-- iOS section
+	--
+	iphone =
+	{
+		xcassets = "Images.xcassets",
+		plist =
+		{
+			UIStatusBarHidden = false,
+			UILaunchStoryboardName = "LaunchScreen",
+		},
+	},
+
+	--
+	-- Plugins section
+	--
+	plugins =
+	{
+		["plugin.notifications.v2"] = 
+		{
+			publisherId = "com.coronalabs"
+		},
+		["CoronaProvider.native.popup.social"] = 
+		{
+			publisherId = "com.coronalabs"
+		},
+		["plugin.twitter"] = {
+			publisherId = "com.jasonschroeder",
+		},
+	},
+
+	--
+	-- Project section
+	--
+	excludeFiles =
+	{
+		-- Exclude unnecessary files for each platform
+		all = { "Icon.png", "Icon-*dpi.png", "Images.xcassets", },
+		android = { "LaunchScreen.storyboardc", },
+	},
+}
